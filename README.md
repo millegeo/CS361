@@ -1,2 +1,2 @@
 # CS361
-Test Repostitory
+Vacation planning application
