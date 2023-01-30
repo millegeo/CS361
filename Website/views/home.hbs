@@ -1,0 +1,50 @@
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<!-- Navigation bar at top of page -->
+    <div class="navbar">
+        <a class="active" href="/">Home</a>
+        <a href="/mytable-page">Custom Table</a>
+        <a href="/about-page">About</a>
+    </div>
+
+<!-- Section of code to provide brief explanation of application -->    
+    <div id="content">
+        <h1>My Vacation Planner</h1>
+        <p>&nbsp;</p>
+        <h2>
+            Please select one of our popular vacation destinations to learn more about where you may like to visit!
+            If you don't know where you want to go, be adventurous and select random. Upon selection, information
+            on some of our favorite vacation destinations will be displayed. Hopefully we can help you find your
+            next vacation destination with the simple click of a button! <br><br>
+            For more detailed information on how it all works please select <a href="/about-page">here</a> or simply click
+            the about tab in the navigation bar up top.
+        </h2>
+    </div>
+
+<!-- Search bar to populate table information which includes name, description and image of location -->
+    
+    <div id="search-field">
+        <div class="center">
+            <p>Select a Popular Destination From the Dropdown to Obtain information <br></p>
+        </div>
+        
+        <div class="center">
+            <form id="search-destination" method='GET' action="/">
+                <label for="input-destination">Find a Location: </label>
+                <select name="input-destination" id="destination-select">
+                    <option value="test">Select a Destination</option>
+                    {{#each data}}
+                    <option value="{{this.destination_id}}">{{this.destination_name}}</option>
+                    {{/each}}
+                </select>
+
+                <input type="submit">
+                <a href="/"><button>Clear Result</button></a>
+            </form>     
+        </div>
+    </div>
+</body>
