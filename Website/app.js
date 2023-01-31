@@ -6,7 +6,7 @@
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 var path = require('path');
-PORT        = 10258;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 10259;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 const { engine } = require('express-handlebars');
@@ -17,44 +17,36 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(express.static('Images'));
 app.use(express.static(path.join(__dirname, 'public/css')));
 
-app.length('/', function(req, res){
-    res.send("The server is Running!")
-})
 /*
     ROUTES
 */
-/*
+
 // Render home page that has the main functionality implemented onto it
 app.get('/', function(req, res) 
     {
-        query1 = 'SELECT * FROM Destinations;';
+        let query1 = "SELECT * FROM Destinations;"
         db.pool.query(query1, function(error, rows, fields){
-            let destination = rows;
-            return res.render('home');
-        });
-        /*
-        let query1;
-        //No search being performed so do nothing
-        if (req.query.destination_name === undefined)
-        {
-            return res.render('home')
-        } 
-        //Search is being performed so display the results for that search.
-        else 
-        {
-            let query1 = `SELECT * FROM Destinations WHERE destination_name = "${req.query.destination_name}%";`;
-            db.pool.query(query1, function(error, rows, fields){
-                let destination = rows;
-                return res.render('home', {data: destination})
-            })
-        }  
+            res.render('home', {data: rows});  
+        }) 
+    });
+
+// Show information based on selected input
+app.get('/show-table', function(req,res)
+    {   
+        destinationId = parseInt(req.query.input_destination)
+        let query1 = `SELECT * FROM Destinations WHERE destination_id = ${destinationId};`
+
+        db.pool.query(query1, function(error, rows, fields){
+            return res.render('show-table', {data : rows})
+        })
     });
 
 /*
 ***************Routes for About Page***************************
-
+*/
 
 // Render about page. Page simply describes what is happening in more detail
 
@@ -72,7 +64,7 @@ app.get('/mytable-page', function(req, res)
         return res.render('mytable-page')
     });
 
-*/
+
 /*
     LISTENER
 */

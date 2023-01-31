@@ -1,7 +1,7 @@
 body {
-    font-family: 'Courier New';
+    font-family:'Times New Roman', Times, serif;
     margin: 0;
-    background-color: #fbfbfb;
+    background-color: #bda7a7;
 }
 
 h1 {
@@ -10,13 +10,14 @@ h1 {
 
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(41, 3, 3);
     margin: none;
+    font-weight:bolder;
 }
 
 .navbar a {
     float: left;
-    color: #f2f2f2;
+    color: rgba(204, 223, 203, 0.753);
     text-align: center;
     padding: 15px;
     text-decoration: none;
@@ -45,26 +46,20 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+td {
     border: 1px solid black;
+    background-color: rgb(145, 145, 145);
+    color: aliceblue;
+    font-size: larger;
     padding: 5px;
 }
 
-#browse {
-    display: block;
-}
-
-#crud {
-    display: block;
-}
-
-.field {
-    padding: 10;
-}
-
-label {
-    padding-left: 15;
-    padding-bottom: 20;
+th {
+    border: 1px solid whitesmoke;
+    padding: 5px;
+    background-color: black;
+    color:aliceblue;
+    font-size: larger;
 }
 
 input, button, option, select {
@@ -74,50 +69,6 @@ input, button, option, select {
 
 .btn {
     padding-left: 20;
-}
-
-.index{
-    padding:2rem;
-    border:#333;
-    border-style:double;
-    border-radius:1em;
-    background-color: #333;
-    font-size: 100%;
-    position: absolute;
-    text-align: left;
-    margin-left: 25%;
-    margin-top:5%;
-}
-
-.index a {
-    overflow: hidden;
-    background-color: #333;
-    margin-bottom: 5em;
-    color: #f2f2f2;
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-}
-
-.index a:hover {
-    background-color: #333;
-    color: black;
-}
- .list h1 {
-    background-color:azure;
-    color:#333;
-    text-align: center;
-    font-size:3rem;
- }
-
-.list p {
-    color:azure;
-    font-size:large;
-    font:bold;
-}
-
-.main {
-    background-color: #333;
 }
 
 .center {
@@ -136,5 +87,5 @@ input, button, option, select {
     margin-bottom: 2%;
     border-color:#333;
     border-radius: 2px;
-    background-color: #ddd;
+    background-color: rgb(134, 133, 146);
 }
