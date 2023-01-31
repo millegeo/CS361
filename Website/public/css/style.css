@@ -1,7 +1,7 @@
 body {
-    font-family:'Times New Roman', Times, serif;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 0;
-    background-color: #bda7a7;
+    background-color: #e1e9f6;
 }
 
 h1 {
@@ -10,7 +10,7 @@ h1 {
 
 .navbar {
     overflow: hidden;
-    background-color: rgb(41, 3, 3);
+    background-color: rgb(14, 22, 51);
     margin: none;
     font-weight:bolder;
 }
@@ -30,7 +30,7 @@ h1 {
 }
 
 .navbar a.active {
-    background-color: #4488ff;
+    background-color: #87a6d0;
     color: white;
 }
 
@@ -63,7 +63,6 @@ th {
 }
 
 input, button, option, select {
-    font-family: 'Courier New';
     padding: 10px;
 }
 
@@ -87,5 +86,26 @@ input, button, option, select {
     margin-bottom: 2%;
     border-color:#333;
     border-radius: 2px;
-    background-color: rgb(134, 133, 146);
+    background-color: rgb(62, 56, 78);
+}
+
+.advanced-button {
+    text-align: center;
+    margin-left: 47%;
+    padding: auto;
+}
+
+.advanced-search {
+    text-align: center;
+    margin-top: 10px;
+
+}
+
+.advanced-title {
+    text-align: center;
+}
+
+.intro {
+    margin-right: 10%;
+    margin-left: 10%;
 }

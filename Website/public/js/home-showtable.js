@@ -8,3 +8,12 @@ function clearTable() {
         return;
     }
 }
+
+function alertAdvanced() {
+    const answer = confirm("Going to advanced search will not guarantee accuracy. You MUST know the name and spelling of the location you're interested in. Click Okay to proceed.")
+    if (answer) {
+        window.location.assign("/advanced-search")
+    } else {
+        return;
+    }
+}

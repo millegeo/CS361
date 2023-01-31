@@ -44,6 +44,10 @@ app.get('/show-table', function(req,res)
         })
     });
 
+// Render advanced search page
+app.get('/advanced-search', function(req,res){
+    return res.render('advanced-search')
+})
 /*
 ***************Routes for About Page***************************
 */
