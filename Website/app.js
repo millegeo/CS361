@@ -44,6 +44,32 @@ app.get('/show-table', function(req,res)
         })
     });
 
+// Update my table to included added destination:
+app.put('/update-table/:destinationId', function(req,res) {
+    let data = req.body;
+    let destinationId = parseInt(data.id)
+    updateQuery = `UPDATE Destinations SET myDestination_id = 1 WHERE Destinations.destination_id = ${destinationId};`
+
+    db.pool.query(updateQuery, function(error, rows, fields){
+    })
+})
+
+app.put('/delete-table/:destinationId', function(req,res){
+    let data = req.body;
+    let destinationId = parseInt(data.id)
+    removeQuery = `UPDATE Destinations SET myDestination_id = NULL WHERE Destinations.destination_id = ${destinationId};`
+
+    db.pool.query(removeQuery, function(error, rows, fields){
+
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    })
+})
+
 // Render advanced search page
 app.get('/advanced-search', function(req,res){
     return res.render('advanced-search')
@@ -65,7 +91,12 @@ app.get('/about-page', function(req, res)
 
 app.get('/mytable-page', function(req, res)
     {
-        return res.render('mytable-page')
+        selectQuery = 'SELECT * FROM Destinations WHERE myDestination_id = 1'
+
+        db.pool.query(selectQuery, function(error, rows, fields){
+            return res.render('mytable-page', {data : rows})
+        })
+        
     });
 
 

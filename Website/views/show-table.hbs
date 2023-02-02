@@ -30,6 +30,8 @@
         <th>Destination Name</th>
         <th>Description</th>
         <th>Flag</th>
+
+    <!-- Display destination information in a table -->
     {{#each data}}
         <tr>
             <td>{{this.destination_name}}</td>
@@ -39,8 +41,14 @@
     </table>
     <p>For more information on {{this.destination_name}} please visit <a href="https://www.wikipedia.org/wiki/{{this.destination_name}}">Wikipedia</a></p>
     {{/each}}
+
     <!-- Clear table/prompt user to ask if they are sure they want to continue -->
     <button  title="Clear the table and start from scratch!" onClick="clearTable()">Clear Result</button>
+
+    <!-- Button to add information to table -->
+    {{#each data}}
+    <button title="Add destination to your table!" onClick="updateTable({{this.destination_id}})">Add to My Table</button>
+    {{/each}}
 </body>
 
 <script src="./js/home-showtable.js"></script>
