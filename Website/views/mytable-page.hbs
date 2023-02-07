@@ -24,14 +24,13 @@
             <td>{{this.destination_description}}</td>
             <td><button onClick='removeFromTable({{this.destination_id}})'>Delete</button></td>
         </tr>
-    </table>
     {{/each}}
+    </table>
+    
 
     <!-- Button to add information to table -->
     <div class='add-button'>
-        {{#each data}}
         <a href="/"><button title="Add destination to your table!" >Add More</button></a>
-        {{/each}}
     </div>
     
 </body>
