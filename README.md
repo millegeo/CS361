@@ -1,4 +1,5 @@
-COMMUNICATION CONTRACT:
+COMMUNICATION CONTRACT for Microservice:
+
 How to REQUEST data:
 PREREQUISITES:
 Logged onto OSU servers via Cisco.
