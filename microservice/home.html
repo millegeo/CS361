@@ -1,13 +1,27 @@
 <html>
     <head>
-        <script src="node-translate.js" type="module"></script>
+        
     </head>
     <body>
+        <script>
+            var xhttp = new XMLHttpRequest();
+            word = 'my name is geoff. ``` some code block ``` What is your name?'
+            xhttp.open('GET', 'http://localhost:9124/translator?message=' + word, true)
+            xhttp.onreadystatechange = function() {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    var data = xhttp.responseText;
+                    console.log(data)
+                }
+            }
+            xhttp.send();
+        </script>
         <p id="myId">
-            <form action="/whatever" method="GET">
-                <input type="text" name="random">
+            <form action="/translator" method="GET">
+                <input type="text" name="message" id="test">
                 <input type="submit">
             </form>
         </p>
     </body>
+    
+    
 </html>
