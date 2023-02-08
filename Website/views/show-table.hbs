@@ -48,7 +48,11 @@
     <!-- Button to add information to table -->
     {{#each data}}
     <button title="Add destination to your table!" onClick="updateTable({{this.destination_id}})">Add to My Table</button>
+    <button title="Get hotel and flight information for your location!" onClick="microservice({{this.destination_name}})">Travel Information</button>
     {{/each}}
+    <table id="travel-info">
+        
+    </table>
 </body>
 
-<script src="./js/home-showtable.js"></script>
+<script src="./js/script.js"></script>
