@@ -14,7 +14,7 @@ PORT = 9124;
 
 app.get('/', function(req, res) {
 
-    data = req.query.random;
+    data = req.query.message;
     
     res.sendFile('home.html', {
         root: path.join(__dirname, './')
@@ -23,7 +23,7 @@ app.get('/', function(req, res) {
 
 app.get('/translator', function(req, res) {
     
-    data = req.query.random;
+    data = req.query.message;
 
     function translateText(data){
         var indicator = 0;
