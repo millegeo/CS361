@@ -45,7 +45,12 @@ function insert_table(data, locationName) {
     imageHead.innerText = "Image";
     locationCell.innerText = locationName;
     descriptionCell.innerText = dataObject.wiki;
-    // imageCell.innerText = dataObject.images[0];
+    // Create image object
+    let image = document.createElement("IMG");
+    image.setAttribute("src", dataObject.images[0]);
+    image.setAttribute("width", "400px");
+    image.setAttribute("height", "200px");
+    imageCell.appendChild(image);
 
     headRow.appendChild(locationHead);
     headRow.appendChild(descriptionHead);
