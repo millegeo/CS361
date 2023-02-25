@@ -1,4 +1,6 @@
-/* Function to first alert user then upon selection of yes clear results of table */
+/* 
+Function to first alert user then upon selection of yes clear results of table
+ */
 
 function clearTable() {
     const answer = confirm("Are you sure you want to clear your results?")
@@ -9,7 +11,9 @@ function clearTable() {
     }
 }
 
-//Notify of outcome of proceeding with advanced search.
+/*
+Notify of outcome of proceeding with advanced search.
+*/
 function alertAdvanced() {
     const answer = confirm("Going to advanced search will not guarantee accuracy. You MUST know the name and spelling of the location you're interested in. Click Okay to proceed.")
     if (answer) {
@@ -19,7 +23,9 @@ function alertAdvanced() {
     }
 }
 
-//Update myTable with new destination using ajax.
+/*
+Update myTable with new destination using ajax.
+*/
 function updateTable(destinationId) {
     var link = '/update-table/';
     link += destinationId;
@@ -36,7 +42,9 @@ function updateTable(destinationId) {
     alert("Successfully added destination to your table")
 }
 
-//Remove destination from myTable using ajax.
+/*
+Remove destination from myTable using ajax.
+*/
 function removeFromTable(destinationId) {
     const answer = confirm("Are you sure you want to remove from your table?")
     if (answer) {
@@ -60,7 +68,9 @@ function removeFromTable(destinationId) {
     
 }
 
-//Delete row from table
+/*
+Delete row from table
+*/
 function deleteRow(id) {
     let table = document.getElementById('my-table')
     for (let i=0, row; row = table.rows[i]; i++) {
@@ -71,20 +81,12 @@ function deleteRow(id) {
     }
 }
 
-//Request travel information from microservice and call addInformation to add to table.
-function microservice(location) {
-    var xhttp = new XMLHttpRequest();
-        xhttp.open('GET', 'http://localhost:9124/translator?random=' + location, true) //Need URL for microservice
-        xhttp.onreadystatechange = function() {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-                var data = xhttp.responseText;
-                addInformation(data);
-            }
-        }
-        xhttp.send();
-}
-
-//  ****TO IMPLEMENT**** Get data from microservice and add information to table
-function addInformation(location) {
-    table = document.getElementById('travel-info');
-}
+/*
+Select random destination_id
+*/
+function randomLocation(numOfDest) {
+    destination_id = Math.floor(Math.random()*numOfDest);
+    var link = '/show-table?input_destination='
+    link += destination_id;
+    window.location.assign(link);
+    }

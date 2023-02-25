@@ -37,11 +37,21 @@ app.get('/', function(req, res)
 app.get('/show-table', function(req,res)
     {   
         destinationId = parseInt(req.query.input_destination)
-        let query1 = `SELECT * FROM Destinations WHERE destination_id = ${destinationId};`
+        if (destinationId) {
+            let query1 = `SELECT * FROM Destinations WHERE destination_id = ${destinationId};`
 
-        db.pool.query(query1, function(error, rows, fields){
-            return res.render('show-table', {data : rows})
-        })
+            db.pool.query(query1, function(error, rows, fields){
+                //If query is not defined, do nothing.
+                if (JSON.stringify(rows) == "[]") {
+                    return res.redirect('/');
+                } else {
+                    return res.render('show-table', {data : rows})
+                }
+                
+            })
+        } else {
+            return res.redirect('/');
+        }
     });
 
 // Update my table to included added destination:
@@ -54,6 +64,8 @@ app.put('/update-table/:destinationId', function(req,res) {
     })
 })
 
+
+// Perform delete from My Table to remove from myDestanations.
 app.put('/delete-table/:destinationId', function(req,res){
     let data = req.body;
     let destinationId = parseInt(data.id)
@@ -73,6 +85,41 @@ app.put('/delete-table/:destinationId', function(req,res){
 // Render advanced search page
 app.get('/advanced-search', function(req,res){
     return res.render('advanced-search')
+})
+
+// Insert new location into database, request information received from microservice.
+app.post('/advanced-search/update-db/', function(req,res) {
+    data = req.body;
+    destination_name = data.destination;
+    destination_description = JSON.stringify(data.destination_description);
+    // Insert query to make myDestination_id set so table is part of my table. 
+    insert_destination = `INSERT INTO Destinations (destination_name, myDestination_id, destination_description)
+                            VALUES ('${destination_name}', 1, ${destination_description})`
+
+    db.pool.query(insert_destination, function(error, rows, fields){
+        if (error) {
+            // If insert query is duplicate, update Destinations to set myDestination to 1 for rendering on My Table page.
+            if (error.code == 'ER_DUP_ENTRY') {
+                insert_query = `UPDATE Destinations SET myDestination_id = 1
+                                WHERE Destinations.destination_name = '${destination_name}'`
+                db.pool.query(insert_query, function (error, rows, fields){
+                    if (error) {
+                        console.log(error);
+                        res.sendStatus;
+                    } else {
+                        res.send(rows);
+                    }
+                })
+            } else {
+                console.log(error);
+                res.sendStatus(400);
+            }
+            
+        } else {
+            res.send(rows);
+        }
+    })
+    return;
 })
 /*
 ***************Routes for About Page***************************

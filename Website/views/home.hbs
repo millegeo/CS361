@@ -38,18 +38,27 @@
                 <label for="input-destination">Find a Location: </label>
                 <select name="input_destination" id="destination-select">
                     <option value="test">Select a Destination</option>
+                    <!-- Increment counter to be used for range in random search query -->
+                    <script>let counter=0;</script>
                     {{#each data}}
                         <option value="{{this.destination_id}}">{{this.destination_name}}</option>
+                        <script>
+                            counter++;
+                        </script>
                     {{/each}}
                 </select>
                 
                 <!-- Render table below with current drop-down selection -->
                 <input type="submit">
-                <!-- Select random value from drop-down and return result -->
-                <button title="Selects a random location and displays data">Randomize</button>
-            </form>    
+                
+                
+            </form>
+            <!-- Select random value from drop-down and return result -->
+            <button title="Selects a random location and displays data" onclick="randomLocation(counter)">Randomize</button>
+
         </div>    
     </div>
+    <!-- Notify user the consequences of performing advanced search -->
     <button class='advanced-button' onClick='alertAdvanced()'>ADVANCED SEARCH</button>
 </body>
 

@@ -30,13 +30,13 @@
         <th>Destination Name</th>
         <th>Description</th>
         <th>Flag</th>
-
+    
     <!-- Display destination information in a table -->
     {{#each data}}
         <tr>
             <td>{{this.destination_name}}</td>
             <td>{{this.destination_description}}</td>
-            <td><img src="{{this.image_path}}" alt="Canadian Flag"></td>
+            <td><img src="{{this.image_path}}" alt="Destination Image"></td>
         </tr>
     </table>
     <p>For more information on {{this.destination_name}} please visit <a href="https://www.wikipedia.org/wiki/{{this.destination_name}}">Wikipedia</a></p>
@@ -48,11 +48,8 @@
     <!-- Button to add information to table -->
     {{#each data}}
     <button title="Add destination to your table!" onClick="updateTable({{this.destination_id}})">Add to My Table</button>
-    <button title="Get hotel and flight information for your location!" onClick="microservice({{this.destination_name}})">Travel Information</button>
     {{/each}}
-    <table id="travel-info">
-        
-    </table>
+    
 </body>
 
 <script src="./js/script.js"></script>

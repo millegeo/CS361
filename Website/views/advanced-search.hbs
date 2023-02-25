@@ -18,11 +18,19 @@
         <h2>Search for any location, accuracy not guaranteed but hey, you aren't living unless you're tinkering</h2>
     </div>
 
-    <div class="advanced-search">
-        <form action="/show-table" method="GET">
-            <input type="text">
-            <input type="submit">
+<!-- On form submit, javascript eventListener will perform call to microservice -->
+    <div class="advanced-search" id="advanced-table">
+        <form>
+            <input type="text" name="location" id="location">
+            <input id="submit" type="submit">
         </form>
     </div>
-    
+
+<!-- Empty table for DOM calls in JS -->
+    <div id="dynamic-update">
+        <table id="display-table">
+        </table>
+    </div>
 </body>
+
+<script src="./js/advancedScript.js"></script>
