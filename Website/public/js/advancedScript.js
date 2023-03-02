@@ -26,16 +26,12 @@ advancedTable.addEventListener("submit", function (e) {
     function insert_table(data, locationName) {
 
         document.getElementById('advanced-table').style.display = 'none'; //Hide search bar
-
         dataObject = JSON.parse(data)
         let table = document.getElementById('display-table');
-
         // Create elements for table
         create_insert_elements(dataObject, locationName, table);
-
         // Create add button and clear button
         create_clear_add(dataObject, locationName);
-    
     }
 })
 
@@ -43,16 +39,14 @@ advancedTable.addEventListener("submit", function (e) {
     Function to create and add clear button and add to my table button
 */
 function create_clear_add(dataObject, locationName) {
+
     dynamicField = document.getElementById("dynamic-update");
     let clearButton = document.createElement("button");
     let addToTable = document.createElement("button");
-
     clearButton.innerText = "Clear Table";
     addToTable.innerText = "Add to My Table";
-
     clearButton.setAttribute("onclick","clearAdvTable()");
     addToTable.setAttribute("onclick", "update_database(dataObject, locationName)");
-
     dynamicField.appendChild(clearButton);
     dynamicField.appendChild(addToTable);
 }
@@ -61,6 +55,7 @@ function create_clear_add(dataObject, locationName) {
     Function to create table elements and insert data into table
 */
 function create_insert_elements(data, locationName, table) {
+
     let headArray = [null, null, null];
     let rowArray = [null, null, null];
     let headers = ["Location", "Description", "Image"];
@@ -80,6 +75,7 @@ function create_insert_elements(data, locationName, table) {
     Function to create rows for the table;
 */
 function create_rows(headArray, rowArray, table) {
+
     console.log(rowArray);
     let headRow = document.createElement("TR");
     let dataRow = document.createElement("TR");
@@ -95,6 +91,7 @@ function create_rows(headArray, rowArray, table) {
     Function to create image element
 */
 function create_image(data) {
+
     let image = document.createElement("IMG");
     image.setAttribute("src", data.images[0]);
     image.setAttribute("width", "400px");
@@ -106,11 +103,11 @@ function create_image(data) {
     Update the database so destination information is A) Stored and B) Displayed on my table
 */
 function update_database(locationObject, locationName) {
+
     let data = {
         destination: locationName,
         destination_description: locationObject.wiki,
-    }
-    
+    }  
     var xhttp = new XMLHttpRequest();
     xhttp.open('POST', '/advanced-search/update-db', true)
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -127,6 +124,7 @@ function update_database(locationObject, locationName) {
     accidentally clicked.
 */
 function clearAdvTable() {
+    
     const answer = confirm("Are you sure you want to clear your results?")
     if (answer) {
         window.location.assign("/advanced-search")
