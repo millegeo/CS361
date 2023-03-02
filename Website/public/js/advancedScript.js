@@ -20,48 +20,29 @@ advancedTable.addEventListener("submit", function (e) {
             xhttp.send();
 
 
-/* 
-Function to add dynamic data to table and show it
+    /* 
+    Function to add dynamic data to table and show it
+    */
+    function insert_table(data, locationName) {
+
+        hide = document.getElementById('advanced-table').style.display = 'none';
+
+        dataObject = JSON.parse(data)
+        let table = document.getElementById('display-table');
+
+        // Create elements for table
+        create_insert_elements(dataObject, locationName, table);
+
+        // Create add button and clear button
+        create_clear_add(dataObject, locationName);
+    
+    }
+})
+
+/*
+    Function to create and add clear button and add to my table button
 */
-function insert_table(data, locationName) {
-
-    hide = document.getElementById('advanced-table').style.display = 'none';
-
-    dataObject = JSON.parse(data)
-    let table = document.getElementById('display-table');
-    // Create elements for table
-    let locationHead = document.createElement("TH");
-    let descriptionHead = document.createElement("TH");
-    let imageHead = document.createElement("TH");
-    let row = document.createElement("TR");
-    let headRow = document.createElement("TR");
-    let descriptionCell = document.createElement("TD");
-    let imageCell = document.createElement("TD");
-    let locationCell = document.createElement("TD");
-  
-    // Input data into created elements
-    locationHead.innerText = "Location"
-    descriptionHead.innerText = "Description";
-    imageHead.innerText = "Image";
-    locationCell.innerText = locationName;
-    descriptionCell.innerText = dataObject.wiki;
-    // Create image object
-    let image = document.createElement("IMG");
-    image.setAttribute("src", dataObject.images[0]);
-    image.setAttribute("width", "400px");
-    image.setAttribute("height", "200px");
-    imageCell.appendChild(image);
-
-    headRow.appendChild(locationHead);
-    headRow.appendChild(descriptionHead);
-    headRow.appendChild(imageHead);
-    row.appendChild(locationCell);
-    row.appendChild(descriptionCell);
-    row.appendChild(imageCell);
-
-    table.appendChild(headRow);
-    table.appendChild(row);
-
+function create_clear_add(dataObject, locationName) {
     dynamicField = document.getElementById("dynamic-update");
     let clearButton = document.createElement("button");
     let addToTable = document.createElement("button");
@@ -76,8 +57,49 @@ function insert_table(data, locationName) {
     dynamicField.appendChild(addToTable);
 }
 
-})
+/*
+    Function to create table elements and insert data into table
+*/
+function create_insert_elements(data, locationName, table) {
+    let headArray = [null, null, null];
+    let rowArray = [null, null, null];
+    let headers = ["Location", "Description", "Image"];
+    for (i = 0; i < 3; i++) {
+        headArray[i] = document.createElement("TH");
+        headArray[i].innerText = headers[i];
+        rowArray[i] = document.createElement("TD");
+    }
+    rowArray[0].innerText = locationName;
+    rowArray[1].innerText = data.wiki;
+    let image_cell = create_image(data);
+    rowArray[2].appendChild(image_cell);
+    create_rows(headArray, rowArray, table);
+}
 
+/*
+    Function to create rows for the table;
+*/
+function create_rows(headArray, rowArray, table) {
+    console.log(rowArray);
+    let headRow = document.createElement("TR");
+    let dataRow = document.createElement("TR");
+    for (i=0; i<3; i++) {
+        headRow.appendChild(headArray[i]);
+        dataRow.appendChild(rowArray[i]);
+    }
+    table.appendChild(headRow);
+    table.appendChild(dataRow);
+}
+/*
+    Function to create image element
+*/
+function create_image(data) {
+    let image = document.createElement("IMG");
+    image.setAttribute("src", data.images[0]);
+    image.setAttribute("width", "400px");
+    image.setAttribute("height", "200px");
+    return image;
+}
 /*
 Update the database so destination information is A) Stored and B) Displayed on my table
 */
