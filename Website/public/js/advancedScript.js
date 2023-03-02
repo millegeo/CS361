@@ -1,5 +1,5 @@
 /*
-Set-up event listener for advanced search and perform call to microservice on event.
+    Set-up event listener for advanced search and perform call to microservice on event.
 */
 
 let advancedTable = document.getElementById('advanced-table');
@@ -21,11 +21,11 @@ advancedTable.addEventListener("submit", function (e) {
 
 
     /* 
-    Function to add dynamic data to table and show it
+        Function to add dynamic data to table and show it
     */
     function insert_table(data, locationName) {
 
-        hide = document.getElementById('advanced-table').style.display = 'none';
+        document.getElementById('advanced-table').style.display = 'none'; //Hide search bar
 
         dataObject = JSON.parse(data)
         let table = document.getElementById('display-table');
@@ -90,6 +90,7 @@ function create_rows(headArray, rowArray, table) {
     table.appendChild(headRow);
     table.appendChild(dataRow);
 }
+
 /*
     Function to create image element
 */
@@ -100,8 +101,9 @@ function create_image(data) {
     image.setAttribute("height", "200px");
     return image;
 }
+
 /*
-Update the database so destination information is A) Stored and B) Displayed on my table
+    Update the database so destination information is A) Stored and B) Displayed on my table
 */
 function update_database(locationObject, locationName) {
     let data = {
@@ -121,8 +123,8 @@ function update_database(locationObject, locationName) {
 }
 
 /*
-Ask user to confirm they want to clear the result from table in case it was
-accidentally clicked.
+    Ask user to confirm they want to clear the result from table in case it was
+    accidentally clicked.
 */
 function clearAdvTable() {
     const answer = confirm("Are you sure you want to clear your results?")
@@ -134,7 +136,7 @@ function clearAdvTable() {
 }
 
 /*
-Prompt user that location is not a valid query
+    Prompt user that location is not a valid query
 */
 function displayError(locationName) {
     alert(`${locationName} is not a valid search query`);
