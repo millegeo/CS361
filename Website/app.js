@@ -146,6 +146,10 @@ app.get('/mytable-page', function(req, res)
         
     });
 
+app.get('/countries', function(req, res){
+    countries = require('./views/countries.json');
+    res.send(countries);
+});
 
 /*
     LISTENER

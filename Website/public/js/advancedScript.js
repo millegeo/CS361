@@ -1,24 +1,30 @@
+
 /*
     Set-up event listener for advanced search and perform call to microservice on event.
 */
-
 let advancedTable = document.getElementById('advanced-table');
 
 advancedTable.addEventListener("submit", function (e) {
-
     e.preventDefault();
-
     locationName = document.getElementById("location").value
     var xhttp = new XMLHttpRequest();
             xhttp.open('GET', 'http://localhost:8081/query/' + locationName, true) //XML call to web scraping microservice
             xhttp.onreadystatechange = function() {
                 if (xhttp.readyState == 4 && xhttp.status == 200) {
                     var data = xhttp.responseText;
-                    insert_table(data, locationName);
+                    var countryXML = new XMLHttpRequest();
+                    countryXML.open('GET', "http://localhost:8080/countries", false);
+                    countryXML.send();
+                    countries = countryXML.responseText;
+                    countries = JSON.parse(countries);
+                    if (countries.countries.includes(locationName)) {
+                        insert_table(data, locationName);
+                    } else {
+                        locationError(locationName);
+                    }                  
                 }
             }
             xhttp.send();
-
 
     /* 
         Function to add dynamic data to table and show it
@@ -124,7 +130,7 @@ function update_database(locationObject, locationName) {
     accidentally clicked.
 */
 function clearAdvTable() {
-    
+
     const answer = confirm("Are you sure you want to clear your results?")
     if (answer) {
         window.location.assign("/advanced-search")
@@ -138,5 +144,13 @@ function clearAdvTable() {
 */
 function displayError(locationName) {
     alert(`${locationName} is not a valid search query`);
+    window.location.assign("/advanced-search");
+}
+
+/*
+    Invalid country requested/display prompt to user.
+*/
+function locationError(locationName) {
+    alert(`${locationName} is not a valid country`);
     window.location.assign("/advanced-search");
 }

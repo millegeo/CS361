@@ -19,7 +19,11 @@
 
     <!-- Display destination information in a table -->
     {{#each data}}
-        <tr data-value={{this.destination_id}}>
+        <tr data-value={{this.destination_id}}
+            draggable="true"
+            ondragstart="start()"
+            ondragover="dragover()"    
+        >
             <td>{{this.destination_name}}</td>
             <td>{{this.destination_description}}</td>
             <td><button onClick='removeFromTable({{this.destination_id}})'>Delete</button></td>
